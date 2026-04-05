@@ -1,7 +1,7 @@
 *This project has been created as part of the 42 curriculum by hisasano.*
 #　Philosophers
 
-##　Description
+## Description
 
 This project aims to learn how to implement concurrent processing by simulating the behavior of an imaginary species called philosophers.
 
@@ -59,7 +59,7 @@ valgrind --fair-sched=yes ./philo 5 800 200 200
 -Github (various approaches, tests)
 -Leetcode (another approach)
 
-##AI usage
+## AI usage
 
 - Used AI to understand threading and mutex concepts
 - Used AI for debugging ideas and problem analysis
