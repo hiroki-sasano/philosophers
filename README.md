@@ -1,5 +1,5 @@
 *This project has been created as part of the 42 curriculum by hisasano.*
-#　Philosophers
+# Philosophers
 
 ## Description
 
@@ -33,7 +33,7 @@ Example:
 ./philo 5 800 200 200
 ```
 
-## Tools
+## Testing
 
 - Valgrind — useful for debugging memory leaks and thread issues  
   - `--leak-check=full` for detecting memory leaks  
@@ -53,17 +53,16 @@ valgrind --fair-sched=yes ./philo 5 800 200 200
 ```
 
 ## Resources
--The Dining Philosophers Problem (Wiki)
--pthreads documentation
--42 School "philosophers" subject PDF
--Github (various approaches, tests)
--Leetcode (another approach)
+- The Dining Philosophers Problem (Wiki)
+- pthreads documentation
+- 42 School "philosophers" subject PDF
+- Github (various approaches, tests)
+- Leetcode (another approach)
 
-## AI usage
+### AI usage
 
 - Used AI to understand threading and mutex concepts
 - Used AI for debugging ideas and problem analysis
 - Used AI to help structure the README
 
 All code was written and fully understood by myself.
-
