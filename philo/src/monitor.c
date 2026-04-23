@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 00:02:13 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:14:50 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:06:11 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	print_death(t_philo *p)
 
 void	*monitor_routine(void *arg)
 {
-	t_philo *philos;
-	int i;
+	t_philo	*philos;
+	int		i;
 
 	philos = (t_philo *)arg;
 	while (!get_stop(philos[0].rules))

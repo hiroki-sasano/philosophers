@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 20:25:07 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:27:25 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:03:33 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	philo_sleep(t_philo *p)
 	print_state(p, "is sleeping");
 	smart_usleep(p->rules->t_sleep, p->rules);
 }
+
 void	think(t_philo *p)
 {
 	print_state(p, "is thinking");

@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:42:30 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/21 21:28:30 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/23 19:33:16 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,3 @@ int	ft_atoi_pos(const char *s, int *out)
 	*out = (int)n;
 	return (0);
 }
-
-// int	ft_strcmp(const char *s1, const char *s2)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while ((s1[i] != '\0' || s2[i] != '\0'))
-// 	{
-// 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
-// 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
