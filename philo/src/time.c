@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:42:11 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:29:12 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 18:06:18 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,3 @@ void	smart_usleep(long ms, t_rules *rules)
 		usleep(500);
 	}
 }
-
-/*1000L ＝　treat as a type long*/

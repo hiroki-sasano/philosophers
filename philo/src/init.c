@@ -6,30 +6,11 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:41:32 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/24 17:27:43 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 18:04:16 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static void	cleanup_rules(t_rules *r)
-{
-	int	i;
-
-	if (r->forks)
-	{
-		i = 0;
-		while (i < r->n_philo)
-		{
-			pthread_mutex_destroy(&r->forks[i]);
-			i++;
-		}
-		free(r->forks);
-		r->forks = NULL;
-	}
-	pthread_mutex_destroy(&r->stop_m);
-	pthread_mutex_destroy(&r->print_m);
-}
 
 static int	init_mutexes(t_rules *r)
 {

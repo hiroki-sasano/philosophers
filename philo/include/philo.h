@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:02:20 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/23 19:02:57 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 18:05:22 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo
 
 int					parse_args(t_rules *r, int ac, char **av);
 int					init_all(t_rules *r, t_philo **philos);
+void				cleanup_rules(t_rules *r);
 void				destroy_all(t_rules *r, t_philo *philos);
 long				now_ms(void);
 long				elapsed_ms(long start_ms);

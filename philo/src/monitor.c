@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 00:02:13 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/23 19:06:11 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 20:34:08 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	*monitor_routine(void *arg)
 			set_stop(philos[0].rules, 1);
 			return (NULL);
 		}
-		usleep(500);
 	}
 	return (NULL);
 }
