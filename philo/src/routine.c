@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 21:46:26 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:28:47 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:58:38 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*philo_routine(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
+	if (p->id % 2 == 0)
+		smart_usleep(p->rules->t_eat / 2, p->rules);
 	while (!get_stop(p->rules))
 	{
 		take_forks(p);
@@ -32,6 +34,3 @@ void	*philo_routine(void *arg)
 	}
 	return (NULL);
 }
-
-// 哲学者は「食べる・考える・寝る」を繰り返す
-// get fork → eat → put_fork → sleep → think

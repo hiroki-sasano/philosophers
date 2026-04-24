@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:41:52 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:27:50 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:34:14 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	destroy_all(t_rules *r, t_philo *p)
 	}
 	pthread_mutex_destroy(&r->print_m);
 	pthread_mutex_destroy(&r->stop_m);
-	i = 0;
-	while (i < r->n_philo)
+	if (p)
 	{
-		pthread_mutex_destroy(&p[i].meal_m);
-		i++;
+		i = 0;
+		while (i < r->n_philo)
+		{
+			pthread_mutex_destroy(&p[i].meal_m);
+			i++;
+		}
 	}
 	free(p);
 }

@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:38:58 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/23 20:22:37 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:31:30 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	main(int ac, char **av)
 	if (parse_args(&rules, ac, av) != 0)
 		return (1);
 	if (init_all(&rules, &philos) != 0)
-	{
-		destroy_all(&rules, philos);
 		return (1);
-	}
 	if (start_simulation(&rules, philos, &monitor) != 0)
 	{
 		destroy_all(&rules, philos);

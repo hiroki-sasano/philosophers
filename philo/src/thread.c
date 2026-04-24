@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 20:26:00 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:29:05 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:31:52 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	create_threads(int n, t_philo *p)
 	{
 		if (pthread_create(&p[i].thread, NULL, philo_routine, &p[i]) != 0)
 		{
+			set_stop(p[0].rules, 1);
 			join_created_threads(i, p);
 			return (1);
 		}

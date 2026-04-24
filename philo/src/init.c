@@ -6,11 +6,30 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:41:32 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/19 23:31:09 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:27:43 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	cleanup_rules(t_rules *r)
+{
+	int	i;
+
+	if (r->forks)
+	{
+		i = 0;
+		while (i < r->n_philo)
+		{
+			pthread_mutex_destroy(&r->forks[i]);
+			i++;
+		}
+		free(r->forks);
+		r->forks = NULL;
+	}
+	pthread_mutex_destroy(&r->stop_m);
+	pthread_mutex_destroy(&r->print_m);
+}
 
 static int	init_mutexes(t_rules *r)
 {
@@ -35,7 +54,13 @@ static int	init_forks(t_rules *r)
 	while (i < r->n_philo)
 	{
 		if (pthread_mutex_init(&r->forks[i], NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&r->forks[i]);
+			free(r->forks);
+			r->forks = NULL;
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -47,7 +72,7 @@ static void	assign_forks(t_rules *r, t_philo *p, int i)
 	p[i].right_fork = &r->forks[(i + 1) % r->n_philo];
 }
 
-static void	init_philos_fields(t_rules *r, t_philo *p)
+static int	init_philos_fields(t_rules *r, t_philo *p)
 {
 	int	i;
 
@@ -59,9 +84,15 @@ static void	init_philos_fields(t_rules *r, t_philo *p)
 		p[i].rules = r;
 		p[i].last_meal = r->start_time;
 		assign_forks(r, p, i);
-		pthread_mutex_init(&p[i].meal_m, NULL);
+		if (pthread_mutex_init(&p[i].meal_m, NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&p[i].meal_m);
+			return (1);
+		}
 		i++;
 	}
+	return (0);
 }
 
 int	init_all(t_rules *r, t_philo **philos)
@@ -71,10 +102,23 @@ int	init_all(t_rules *r, t_philo **philos)
 		return (put_err("Error: mutex init\n"), 1);
 	r->start_time = now_ms();
 	if (init_forks(r) != 0)
+	{
+		pthread_mutex_destroy(&r->stop_m);
+		pthread_mutex_destroy(&r->print_m);
 		return (put_err("Error: forks init\n"), 1);
+	}
 	*philos = (t_philo *)malloc(sizeof(t_philo) * r->n_philo);
 	if (!*philos)
+	{
+		cleanup_rules(r);
 		return (put_err("Error: philos malloc\n"), 1);
-	init_philos_fields(r, *philos);
+	}
+	if (init_philos_fields(r, *philos) != 0)
+	{
+		cleanup_rules(r);
+		free(*philos);
+		*philos = NULL;
+		return (put_err("Error: philo mutex init\n"), 1);
+	}
 	return (0);
 }
