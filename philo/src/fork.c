@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 20:24:01 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/22 00:28:01 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/28 14:51:13 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 void	take_forks(t_philo *p)
 {
-	if (p->rules->n_philo == 1)
-	{
-		pthread_mutex_lock(p->left_fork);
-		print_state(p, "has taken a fork");
-		smart_usleep(p->rules->t_die, p->rules);
-		return ;
-	}
 	if (p->id % 2 == 0)
 	{
 		pthread_mutex_lock(p->right_fork);
