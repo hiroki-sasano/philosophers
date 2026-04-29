@@ -6,35 +6,35 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:42:11 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/24 18:06:18 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/29 23:02:41 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	now_ms(void)
+long	now_us(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) != 0)
 		return (0);
-	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1000L));
+	return ((tv.tv_sec * 1000000L) + (tv.tv_usec));
 }
 
-long	elapsed_ms(long start_ms)
+long	elapsed_ms(long start_us)
 {
 	long	now;
 
-	now = now_ms();
-	return (now - start_ms);
+	now = now_us();
+	return ((now - start_us) / 1000L);
 }
 
 void	smart_usleep(long ms, t_rules *rules)
 {
 	long	start;
 
-	start = now_ms();
-	while (now_ms() - start < ms)
+	start = now_us();
+	while (now_us() - start < ms * 1000L)
 	{
 		pthread_mutex_lock(&rules->stop_m);
 		if (rules->stop)
@@ -46,3 +46,9 @@ void	smart_usleep(long ms, t_rules *rules)
 		usleep(500);
 	}
 }
+
+// return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1000L));
+// time_to_death == 100
+// 100.999ms -> 200.000ms = 99.001ms
+// 100ms -> 200ms = 100ms
+// Died 0.999 milliseconds ahead of schedule

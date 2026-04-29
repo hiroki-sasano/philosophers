@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 20:24:01 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/28 14:51:13 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/29 23:28:39 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 void	take_forks(t_philo *p)
 {
+	long	timestamp;
+
 	if (p->id % 2 == 0)
 	{
 		pthread_mutex_lock(p->right_fork);
-		print_state(p, "has taken a fork");
+		timestamp = (now_us() - p->rules->start_time) / 1000L;
+		print_state(p, "has taken a fork", timestamp);
 		pthread_mutex_lock(p->left_fork);
-		print_state(p, "has taken a fork");
+		timestamp = (now_us() - p->rules->start_time) / 1000L;
+		print_state(p, "has taken a fork", timestamp);
 	}
 	else
 	{
 		pthread_mutex_lock(p->left_fork);
-		print_state(p, "has taken a fork");
+		timestamp = (now_us() - p->rules->start_time) / 1000L;
+		print_state(p, "has taken a fork", timestamp);
 		pthread_mutex_lock(p->right_fork);
-		print_state(p, "has taken a fork");
+		timestamp = (now_us() - p->rules->start_time) / 1000L;
+		print_state(p, "has taken a fork", timestamp);
 	}
 	return ;
 }

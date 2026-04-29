@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 17:41:32 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/24 18:04:16 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/29 22:26:19 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	init_all(t_rules *r, t_philo **philos)
 	*philos = NULL;
 	if (init_mutexes(r) != 0)
 		return (put_err("Error: mutex init\n"), 1);
-	r->start_time = now_ms();
+	r->start_time = now_us();
 	if (init_forks(r) != 0)
 	{
 		pthread_mutex_destroy(&r->stop_m);

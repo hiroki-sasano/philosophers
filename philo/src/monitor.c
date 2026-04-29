@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 00:02:13 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/24 20:34:08 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/04/29 23:45:49 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	is_dead(t_philo *p)
 	pthread_mutex_lock(&p->meal_m);
 	last_meal = p->last_meal;
 	pthread_mutex_unlock(&p->meal_m);
-	now = now_ms();
-	if (now - last_meal >= p->rules->t_die)
+	now = now_us();
+	if (now - last_meal >= p->rules->t_die * 1000L)
 		return (1);
 	return (0);
 }
@@ -59,7 +59,7 @@ static void	print_death(t_philo *p)
 	}
 	p->rules->stop = 1;
 	pthread_mutex_lock(&p->rules->print_m);
-	timestamp = elapsed_ms(p->rules->start_time);
+	timestamp = (now_us() - p->rules->start_time) / 1000L;
 	printf("%ld %d died\n", timestamp, p->id);
 	pthread_mutex_unlock(&p->rules->print_m);
 	pthread_mutex_unlock(&p->rules->stop_m);
@@ -88,6 +88,7 @@ void	*monitor_routine(void *arg)
 			set_stop(philos[0].rules, 1);
 			return (NULL);
 		}
+		usleep(50);
 	}
 	return (NULL);
 }
