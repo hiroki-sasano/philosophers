@@ -6,11 +6,26 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 20:25:07 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/29 23:26:00 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:43:41 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	check_death_before_eat(t_philo *p, long now, long *timestamp)
+{
+	pthread_mutex_lock(&p->meal_m);
+	if (now - p->last_meal >= p->rules->t_die * 1000L)
+	{
+		*timestamp = (p->last_meal + p->rules->t_die * 1000L
+				- p->rules->start_time) / 1000L;
+		pthread_mutex_unlock(&p->meal_m);
+		return (1);
+	}
+	p->last_meal = now;
+	pthread_mutex_unlock(&p->meal_m);
+	return (0);
+}
 
 void	eat(t_philo *p)
 {
@@ -19,9 +34,11 @@ void	eat(t_philo *p)
 
 	now = now_us();
 	timestamp = (now - p->rules->start_time) / 1000L;
-	pthread_mutex_lock(&p->meal_m);
-	p->last_meal = now;
-	pthread_mutex_unlock(&p->meal_m);
+	if (check_death_before_eat(p, now, &timestamp))
+	{
+		print_death(p, timestamp);
+		return ;
+	}
 	print_state(p, "is eating", timestamp);
 	smart_usleep(p->rules->t_eat, p->rules);
 	pthread_mutex_lock(&p->meal_m);

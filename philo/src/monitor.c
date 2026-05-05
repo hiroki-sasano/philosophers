@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 00:02:13 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/29 23:45:49 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:46:42 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	all_ate_enough(t_philo *philos)
 	return (1);
 }
 
-static int	is_dead(t_philo *p)
+static int	is_dead(t_philo *p, long *timestamp)
 {
 	long	last_meal;
 	long	now;
@@ -43,32 +43,19 @@ static int	is_dead(t_philo *p)
 	pthread_mutex_unlock(&p->meal_m);
 	now = now_us();
 	if (now - last_meal >= p->rules->t_die * 1000L)
-		return (1);
-	return (0);
-}
-
-static void	print_death(t_philo *p)
-{
-	long	timestamp;
-
-	pthread_mutex_lock(&p->rules->stop_m);
-	if (p->rules->stop)
 	{
-		pthread_mutex_unlock(&p->rules->stop_m);
-		return ;
+		*timestamp = (last_meal + p->rules->t_die * 1000L
+				- p->rules->start_time) / 1000L;
+		return (1);
 	}
-	p->rules->stop = 1;
-	pthread_mutex_lock(&p->rules->print_m);
-	timestamp = (now_us() - p->rules->start_time) / 1000L;
-	printf("%ld %d died\n", timestamp, p->id);
-	pthread_mutex_unlock(&p->rules->print_m);
-	pthread_mutex_unlock(&p->rules->stop_m);
+	return (0);
 }
 
 void	*monitor_routine(void *arg)
 {
 	t_philo	*philos;
 	int		i;
+	long	timestamp;
 
 	philos = (t_philo *)arg;
 	while (!get_stop(philos[0].rules))
@@ -76,9 +63,9 @@ void	*monitor_routine(void *arg)
 		i = 0;
 		while (i < philos[0].rules->n_philo)
 		{
-			if (is_dead(&philos[i]))
+			if (is_dead(&philos[i], &timestamp))
 			{
-				print_death(&philos[i]);
+				print_death(&philos[i], timestamp);
 				return (NULL);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 19:02:20 by hisasano          #+#    #+#             */
-/*   Updated: 2026/04/29 23:37:23 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:46:57 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ long				now_us(void);
 long				elapsed_ms(long start_us);
 void				smart_usleep(long ms, t_rules *rules);
 void				print_state(t_philo *p, char *msg, long timestamp);
+void				print_death(t_philo *p, long timestamp);
 int					create_threads(int n, t_philo *p);
 void				join_threads(int n_philo, t_philo *philos);
 void				*philo_routine(void *arg);
@@ -68,5 +69,3 @@ void				put_err(const char *s);
 void				*monitor_routine(void *arg);
 
 #endif
-
-// lock order: stop_m → print_m → meal_m
