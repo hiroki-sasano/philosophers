@@ -6,7 +6,7 @@
 /*   By: hisasano <hisasano@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 13:05:54 by hisasano          #+#    #+#             */
-/*   Updated: 2026/05/05 15:19:39 by hisasano         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:29:35 by hisasano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	print_state(t_philo *p, char *msg, long timestamp)
 	pthread_mutex_lock(&p->rules->print_m);
 	if (p->rules->stop)
 	{
-		pthread_mutex_unlock(&p->rules->stop_m);
 		pthread_mutex_unlock(&p->rules->print_m);
+		pthread_mutex_unlock(&p->rules->stop_m);
 		return ;
 	}
 	printf("%ld %d %s\n", timestamp, p->id, msg);

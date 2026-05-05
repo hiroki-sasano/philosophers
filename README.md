@@ -41,15 +41,15 @@ Example:
   - `--fair-sched=yes` for fair thread scheduling
 
 ```bash
-valgrind --leak-check=full ./philo 5 800 200 200
+valgrind --leak-check=full ./philo 5 800 200 200 5
 ```
 
 ```bash
-valgrind --tool=helgrind ./philo 5 800 200 200
+valgrind --tool=helgrind ./philo 5 800 200 200 5
 ```
 
 ```bash
-valgrind --fair-sched=yes ./philo 5 800 200 200
+valgrind --fair-sched=yes ./philo 5 800 200 200 5
 ```
 
 ## Resources
