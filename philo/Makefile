@@ -31,3 +31,9 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# | $(OBJ_DIR)　＝　order-only prerequisite
+# $(SRC:.c=.o) = make obj_file_list
+# -c = only compile not link
+# $< = first dependency file  $< = src/main.c
+# $@ = now target  $@ = obj/main.o　Compile the input .c file into a .o file with a specified name.

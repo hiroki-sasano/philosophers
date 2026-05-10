@@ -53,11 +53,29 @@ valgrind --fair-sched=yes ./philo 5 800 200 200 5
 ```
 
 ## Resources
-- The Dining Philosophers Problem (Wiki)
-- pthreads documentation
+- [The Dining Philosophers Problem (Wiki)](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- [pthreads documentation](https://docs.oracle.com/cd/E19253-01/819-0390/tlib-1/index.html)
 - 42 School "philosophers" subject PDF
-- Github (various approaches, tests)
-- Leetcode (another approach)
+- [Leetcode (1226. The Dining Philosophers)](https://leetcode.com/problems/the-dining-philosophers/description/?utm_source=chatgpt.com)
+- [POSIX Threads Programming](https://man7.org/linux/man-pages/man7/pthreads.7.html)
+- [pthread_mutex_lock(3)](https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3p.html)
+- [gettimeofday(2)](https://man7.org/linux/man-pages/man2/gettimeofday.2.html)
+- [usleep(3)](https://man7.org/linux/man-pages/man3/usleep.3.html)
+
+### AI Usage
+
+AI was used as a learning and debugging assistant during the project.
+
+Main use cases included:
+
+- Understanding threading, mutexes, and synchronization concepts
+- Learning deadlock avoidance strategies
+- Reviewing race-condition risks and monitor-thread design
+- Understanding POSIX thread functions and timing behavior
+- Improving README structure and technical explanations
+
+AI was not used to blindly generate or copy complete project logic.
+All code was written, tested, debugged, and fully understood by myself.
 
 ### AI usage
 
@@ -66,3 +84,24 @@ valgrind --fair-sched=yes ./philo 5 800 200 200 5
 - Used AI to help structure the README
 
 All code was written and fully understood by myself.
+
+AIは、プロジェクト期間中に学習およびデバッグ支援ツールとして使用した。
+
+主な使用用途：
+
+- スレッド、mutex、同期処理の概念理解
+- デッドロック回避戦略の学習
+- race condition の危険性や monitor thread 設計のレビュー
+- POSIX thread 関数や時間管理動作の理解
+- README構成や技術説明の改善
+
+AIは、プロジェクト全体のロジックを無批判に生成・コピーする目的では使用していない。
+
+すべてのコードは、自分自身で記述・テスト・デバッグを行い、完全に理解した上で実装した。
+
+AIの利用について
+スレッドや mutex の概念理解のために AI を使用
+デバッグのアイデア出しや問題分析のために AI を使用
+README の構成整理の補助として AI を使用
+
+コードはすべて自分自身で記述し、内容も完全に理解しています。
